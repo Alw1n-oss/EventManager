@@ -28,3 +28,13 @@ Desktop-приложение для управления локальными м
    ```bash
    git clone https://github.com/Alw1n-oss/EventManager.git
    cd EventManager
+2. Создать базу данных event_manager в MySQL:
+   sql
+   Copy
+   CREATE DATABASE event_manager;
+3. Настроить подключение в src/main/resources/META-INF/persistence.xml (указать логин/пароль от MySQL).
+4. Собрать и запустить:
+   bash
+   Copy
+   mvn clean compile
+   mvn javafx:run
