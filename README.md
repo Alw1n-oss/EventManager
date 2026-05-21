@@ -46,7 +46,8 @@ Desktop-приложение для управления локальными м
 2. Создать базу данных event_manager в MySQL:
    CREATE DATABASE event_manager;
    Затем выполнить скрипт event_manager.sql из корня репозитория.
-4. Настроить подключение в src/main/resources/META-INF/persistence.xml (указать логин/пароль от MySQL).
+3. Настроить подключение в src/main/resources/META-INF/persistence.xml (указать логин/пароль от MySQL).
+4. Собрать и запустить:
    mvn clean compile
    mvn javafx:run
    
