@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог мероприятий — EventManager</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        h1 { color: #333; text-align: center; }
+        .filters { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .filters input, .filters select { padding: 8px; margin-right: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .filters button { padding: 8px 16px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .event-card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .event-title { font-size: 18px; font-weight: bold; color: #0066cc; }
+        .meta { color: #666; font-size: 14px; margin: 5px 0; }
+        .places { color: #0066cc; font-weight: bold; }
+        .btn { display: inline-block; padding: 8px 16px; background: #0066cc; color: white; text-decoration: none; border-radius: 4px; margin-top: 10px; border: none; cursor: pointer; }
+        .btn:hover { background: #0052a3; }
+        .btn-outline { background: white; color: #0066cc; border: 1px solid #0066cc; }
+        .empty { text-align: center; color: #999; padding: 40px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .user-info { color: #666; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .alert { padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
+        .alert-success { background: #d4edda; color: #155724; }
+        .alert-error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Каталог мероприятий</h1>
+        <div class="user-info">
+            <span th:if="${userName}" th:text="'Привет, ' + ${userName} + '!'"></span>
+            <a th:if="${userName}" th:href="@{/web/logout}" class="btn btn-outline">Выйти</a>
+            <a th:unless="${userName}" th:href="@{/web/login}" class="btn">Войти</a>
+        </div>
+    </div>
+
+    <div th:if="${message}" class="alert alert-success" th:text="${message}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+    <div class="filters">
+        <form th:action="@{/web/events}" method="get">
+            <input type="text" name="search" placeholder="Поиск по названию" th:value="${search}" />
+            <input type="date" name="dateFrom" th:value="${dateFrom}" />
+            <input type="date" name="dateTo" th:value="${dateTo}" />
+            <select name="sort">
+                <option value="date" th:selected="${sort == 'date'}">По дате ↑</option>
+                <option value="name" th:selected="${sort == 'name'}">По названию</option>
+                <option value="places" th:selected="${sort == 'places'}">По остатку мест</option>
+            </select>
+            <button type="submit">Применить</button>
+            <a th:href="@{/web/events}" style="margin-left: 10px; color: #666;">Сбросить</a>
+        </form>
+    </div>
+
+    <div th:if="${events.empty}" class="empty">
+        <p>Нет доступных мероприятий по заданным критериям.</p>
+    </div>
+
+    <div th:each="event : ${events}" class="event-card">
+        <div class="event-title" th:text="${event.title}">Название</div>
+        <div class="meta">
+            <span th:text="${#dates.format(event.eventDate, 'dd.MM.yyyy HH:mm')}">Дата</span> |
+            <span th:text="${event.venueName}">Место</span>
+        </div>
+        <div class="meta" th:text="${event.description}">Описание</div>
+        <div class="places">
+            Осталось мест: 
+            <span th:text="${event.maxParticipants - event.currentParticipants}">0</span> / 
+            <span th:text="${event.maxParticipants}">0</span>
+        </div>
+        <a th:href="@{/web/events/{id}(id=${event.id})}" class="btn">Подробнее →</a>
+    </div>
+</body>
+</html>

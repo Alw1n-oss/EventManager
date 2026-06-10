@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: eventmanager-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: event_manager
+      MYSQL_USER: event_user
+      MYSQL_PASSWORD: event_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "event_user", "-pevent_pass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: ./eventmanager-api
+    container_name: eventmanager-api
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/event_manager?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: event_user
+      SPRING_DATASOURCE_PASSWORD: event_pass
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
