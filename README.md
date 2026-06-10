@@ -1,53 +1,36 @@
 # EventManager
 
-Desktop-приложение для управления локальными мероприятиями.  
-Курсовой проект по дисциплине «Конструирование программного обеспечения».
+Клиент-серверная информационная система для управления локальными мероприятиями.
 
-## Описание
+## Архитектура
+- **eventmanager-api** — сервер на Spring Boot 2.7 (REST API + Thymeleaf веб-интерфейс), порт 8080
+- **eventmanager-client** — JavaFX desktop-приложение (HTTP-клиент), порт 8080
+- **MySQL 8.0** — база данных, порт 3307
 
-Информационная система **EventManager** предназначена для автоматизации процессов планирования, анонсирования и учёта посещаемости локальных некоммерческих мероприятий. Система поддерживает три роли пользователей: **Администратор**, **Организатор** и **Участник**.
+## Стек
+- Java 11, Spring Boot, Spring Data JPA, Thymeleaf
+- JavaFX (FXML, Scene Builder), HttpClient, Jackson
+- OpenPDF, JUnit 5, Mockito, Docker Compose
 
-## Скриншоты интерфейса
+## Быстрый старт
 
-### Окно авторизации
-![Окно авторизации](screenshots/login.png)
-
-### Панель администратора
-![Панель администратора](screenshots/admin.png)
-
-### Панель организатора
-![Панель организатора](screenshots/organizer.png)
-
-### Каталог мероприятий (участник)
-![Каталог мероприятий](screenshots/participant.png)
-
-## Стек технологий
-
-- **Java 11+** — язык программирования
-- **JavaFX (FXML, Scene Builder)** — графический интерфейс
-- **JPA / Hibernate** — объектно-реляционное отображение
-- **MySQL 8.0** — реляционная СУБД
-- **Maven** — сборка и управление зависимостями
-- **JUnit 5** — модульное тестирование
-
-## Требования
-
-- JDK 11 или новее
-- Apache Maven 3.8+
-- MySQL Server 8.0+
-- JavaFX SDK (если не входит в JDK)
-
-## Установка и запуск
-
-1. Клонировать репозиторий:
-   ```bash
-   git clone https://github.com/Alw1n-oss/EventManager.git
-   cd EventManager
-2. Создать базу данных event_manager в MySQL:
-   CREATE DATABASE event_manager;
-   Затем выполнить скрипт event_manager.sql из корня репозитория.
-3. Настроить подключение в src/main/resources/META-INF/persistence.xml (указать логин/пароль от MySQL).
-4. Собрать и запустить:
-   mvn clean compile
-   mvn javafx:run
-   
+### 1. База данных
+```sql
+CREATE DATABASE event_manager;
+-- выполнить event_manager.sql
+```
+### 2. Сервер
+bash
+cd eventmanager-api
+mvn clean package
+java -jar target/eventmanager-api-1.0.jar
+Сервер доступен на http://localhost:8080.
+### 3. Клиент (JavaFX)
+bash
+cd eventmanager-client
+mvn javafx:run
+### 4. Веб-интерфейс (без установки ПО)
+Открыть в браузере: http://localhost:8080/web/events
+### 5. Docker (опционально)
+bash
+docker-compose up --build
