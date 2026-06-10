@@ -1,0 +1,17 @@
+ru\hse\eventmanager\dto\EventDTO.class
+ru\hse\eventmanager\dto\AuthRequest.class
+ru\hse\eventmanager\controller\AdminController.class
+ru\hse\eventmanager\controller\OrganizerController$1.class
+ru\hse\eventmanager\controller\ParticipantController.class
+ru\hse\eventmanager\dto\UserDTO.class
+ru\hse\eventmanager\controller\OrganizerController.class
+ru\hse\eventmanager\model\Venue.class
+ru\hse\eventmanager\controller\LoginController.class
+ru\hse\eventmanager\App.class
+ru\hse\eventmanager\model\User.class
+ru\hse\eventmanager\dto\VenueDTO.class
+ru\hse\eventmanager\service\ApiService.class
+ru\hse\eventmanager\model\Event.class
+ru\hse\eventmanager\TestConnection.class
+ru\hse\eventmanager\model\Registration.class
+ru\hse\eventmanager\model\UserRole.class
