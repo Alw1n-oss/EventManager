@@ -12,6 +12,26 @@
 - JavaFX (FXML, Scene Builder), HttpClient, Jackson
 - OpenPDF, JUnit 5, Mockito, Docker Compose
 
+## Скриншоты
+
+### Панель администратора
+![Админ](screenshots/admin_panel.png)
+
+### Панель организатора
+![Организатор](screenshots/organizer_panel.png)
+
+### PDF-отчёт
+![PDF](screenshots/organizer_pdf_report.png)
+
+### Веб-каталог (Thymeleaf)
+![Каталог](screenshots/web_catalog.png)
+
+### Веб-детали мероприятия
+![Детали](screenshots/web_details.png)
+
+### Структура серверного проекта
+![Структура](screenshots/server_project_tree.png)
+
 ## Быстрый старт
 
 ### 1. База данных
