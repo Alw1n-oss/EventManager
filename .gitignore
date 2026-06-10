@@ -1,10 +1,68 @@
-target/
+# === Java ===
 *.class
 *.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# === Maven ===
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# === IntelliJ IDEA ===
 .idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# === VS Code ===
+.vscode/
+*.code-workspace
+
+# === Eclipse / NetBeans ===
+.classpath
+.project
+.settings/
 nbproject/private/
 build/
 dist/
-*.log
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# === OS ===
 .DS_Store
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Logs ===
+*.log
+logs/
+
+# === Spring Boot / local config (NEVER commit real passwords!) ===
+**/application-local.properties
+**/application-local.yml
+**/application-dev.properties
+**/application-dev.yml
+**/application-prod.properties
+
+# === Node (if any frontend added later) ===
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# === Docker ===
+*.env
+.env.local
