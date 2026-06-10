@@ -1,4 +1,5 @@
 CREATE DATABASE IF NOT EXISTS event_manager;
+
 USE event_manager;
 
 CREATE TABLE UserRole (
@@ -44,7 +45,6 @@ CREATE TABLE Registration (
     idEvent INT NOT NULL,
     registeredAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status VARCHAR(20) DEFAULT 'CONFIRMED',
-    isSynced BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (idUser) REFERENCES User(idUser),
     FOREIGN KEY (idEvent) REFERENCES Event(idEvent),
     UNIQUE (idUser, idEvent)
